@@ -20,7 +20,7 @@ class AppFadeInImage extends StatelessWidget {
       height: height,
       placeholder: AppAssets.loading,
       image: image,
-      fit: BoxFit.contain,
+      fit: BoxFit.cover,
     );
   }
 }

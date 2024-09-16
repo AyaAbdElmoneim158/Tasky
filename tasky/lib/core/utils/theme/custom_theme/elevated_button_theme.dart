@@ -13,11 +13,11 @@ class AppElevatedButtonTheme {
       disabledForegroundColor: Colors.grey,
       disabledBackgroundColor: Colors.grey,
       side: const BorderSide(color: AppColors.primary),
-      padding: EdgeInsets.symmetric(vertical: AppSizes.defaultSpace),
+      padding: EdgeInsets.symmetric(vertical: AppSizes.defaultSpace / 1.5),
       textStyle: TextStyle(
-        fontSize: AppSizes.fontSizeMd,
+        fontSize: AppSizes.fontSizeLg,
         color: Colors.white,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.bold,
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSizes.borderRadiusLg),

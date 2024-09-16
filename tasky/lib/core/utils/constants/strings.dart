@@ -30,4 +30,7 @@ abstract class AppStrings {
   static const String myTasks = 'My Tasks';
   static const String profile = 'Profile';
   static const String taskDetails = 'task Details';
+
+  static const String pleaseChooseExperienceLevel =
+      'Please choose experience level';
 }
