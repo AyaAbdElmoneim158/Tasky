@@ -45,7 +45,7 @@ Widget buildErrorWidget(
     height: height,
     decoration: BoxDecoration(
       image: DecorationImage(
-        image: image ?? AssetImage(AppImages.loading),
+        image: image ?? AssetImage(AppAssets.loading),
         fit: BoxFit.cover,
       ),
     ),

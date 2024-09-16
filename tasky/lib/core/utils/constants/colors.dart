@@ -22,6 +22,10 @@ class AppColors {
   //Text_Colors - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   static const Color textPrimary = Color(0xff24252C);
   static const Color textSecondary = Color(0xff6E6A7C);
+  static const Color textHintGray = Color(0xFF7F7F7F);
+  static const Color textGray = Color(0xFF757575);
+  static const Color textDarkGrey = Color(0xFF7E7E7E);
+
   static const Color textWhite = Colors.white;
 
   //Background_Colors - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -39,7 +43,7 @@ class AppColors {
   static const Color buttonDisables = Color(0xffc4c4c4);
 
   //Border_Colors - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  static const Color borderPrimary = Color(0xffd9d9d9);
+  static const Color borderPrimary = Color(0xFFBABABA);
   static const Color borderSecondary = Color(0xffe6e6e6);
 
   //Error_Colors - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

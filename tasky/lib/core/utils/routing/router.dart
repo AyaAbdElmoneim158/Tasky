@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import '../../../src/views/splash_screen.dart';
+import '../../../src/views/welcome_screen.dart';
 import 'routes.dart';
 import 'screen_routing.dart';
 
@@ -9,9 +11,12 @@ class AppRouter {
 
     switch (settings.name) {
       case AppRoutes.initRoute:
-        return pageTransition(settings, const SplashView());
+        return pageTransition(settings, const SplashScreen());
+      case AppRoutes.welcomeView:
+        return pageTransition(settings, const WelcomeScreen());
       case AppRoutes.loginView:
         return pageTransition(settings, const LoginView());
+
       case AppRoutes.noFoundRoute:
       default:
         return pageTransition(settings, const NotFoundPage());

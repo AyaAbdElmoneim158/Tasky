@@ -3,7 +3,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:intl/intl.dart';
 
-class THelperFunctions {
+class AppHelperFunctions {
   static Color? getColor(String value) {
     if (value == 'Green') {
       return Colors.green;
@@ -102,7 +102,6 @@ class THelperFunctions {
   static double screenWidth(context) {
     return MediaQuery.of(context!).size.width;
   }
-
 
   static String getFormattedDate(DateTime date,
       {String format = 'dd MMM yyyy'}) {

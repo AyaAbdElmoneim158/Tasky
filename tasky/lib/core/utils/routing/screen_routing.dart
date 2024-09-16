@@ -2,19 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../constants/images.dart';
 
-class SplashView extends StatelessWidget {
-  const SplashView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text("SplashView"),
-      ),
-    );
-  }
-}
-
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
@@ -42,7 +29,7 @@ class NotFoundPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              AppImages.image404,
+              AppAssets.image404,
               width: 250,
             ),
             const SizedBox(height: 12),
@@ -105,7 +92,7 @@ Widget buildNoConnectionScreen(context) {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(
-            AppImages.noInternet,
+            AppAssets.noInternet,
             width: 250,
           ),
           const SizedBox(height: 12),
