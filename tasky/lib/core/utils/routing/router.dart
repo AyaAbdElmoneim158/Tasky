@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import '../../../src/views/splash_screen.dart';
-import '../../../src/views/welcome_screen.dart';
-import '../../../src/views/login_screen.dart';
-import '../../../src/views/register_screen.dart';
+import '../../../features/register/register_screen.dart';
+import '../../../features/splash/splash_screen.dart';
 
+import '../../../features/welcome/welcome_screen.dart';
 import 'routes.dart';
 import 'screen_routing.dart';
 
@@ -17,7 +16,7 @@ class AppRouter {
       case AppRoutes.welcomeView:
         return pageTransition(settings, const WelcomeScreen());
       case AppRoutes.loginView:
-        return pageTransition(settings, const LoginScreen());
+        return pageTransition(settings, const LoginView());
       case AppRoutes.registerView:
         return pageTransition(settings, const RegisterScreen());
       case AppRoutes.noFoundRoute:

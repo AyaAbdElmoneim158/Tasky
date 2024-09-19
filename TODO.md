@@ -9,8 +9,9 @@ Project Description
 
 ### In Progress
 
-- [ ] Add assets + packages  
 
 ### Done ✓
 
+- [x] Refactor code as features  
+- [x] Add assets + packages  
 

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tasky/core/utils/helpers/extension_helper.dart';
-import '../../core/utils/constants/images.dart';
-import '../../core/utils/constants/sizes.dart';
-import '../../core/utils/constants/spacing.dart';
-import '../../core/utils/constants/strings.dart';
-import '../../core/utils/constants/styles.dart';
-import '../../core/utils/helpers/cache_helper.dart';
-import '../../core/utils/helpers/helper_functions.dart';
-import '../../core/utils/routing/routes.dart';
+import '../../../core/utils/constants/images.dart';
+import '../../../core/utils/constants/sizes.dart';
+import '../../../core/utils/constants/spacing.dart';
+import '../../../core/utils/constants/strings.dart';
+import '../../../core/utils/constants/styles.dart';
+import '../../../core/utils/helpers/cache_helper.dart';
+import '../../../core/utils/helpers/helper_functions.dart';
+import '../../../core/utils/routing/routes.dart';
 
 class WelcomeFooter extends StatelessWidget {
   const WelcomeFooter({

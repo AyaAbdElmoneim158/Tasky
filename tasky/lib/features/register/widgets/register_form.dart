@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:tasky/core/utils/helpers/extension_helper.dart';
 
-import '../../core/shared/widgets/auth_footer_rich_text.dart';
-import '../../core/shared/widgets/phone_text_field.dart';
-import '../../core/utils/constants/sizes.dart';
-import '../../core/utils/constants/spacing.dart';
-import '../../core/utils/constants/strings.dart';
-import '../../core/utils/constants/styles.dart';
-import '../../core/utils/helpers/helper_functions.dart';
-import '../../core/utils/routing/routes.dart';
-import 'dropdown_button_form_field.dart';
+import '../../../core/shared/widgets/auth_footer_rich_text.dart';
+import '../../../core/shared/widgets/phone_text_field.dart';
+import '../../../core/utils/constants/sizes.dart';
+import '../../../core/utils/constants/spacing.dart';
+import '../../../core/utils/constants/strings.dart';
+import '../../../core/utils/constants/styles.dart';
+import '../../../core/utils/helpers/helper_functions.dart';
+import '../../../core/utils/routing/routes.dart';
+import '../../login/presentation/view/widgets/dropdown_button_form_field.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({

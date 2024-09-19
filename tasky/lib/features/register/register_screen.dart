@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tasky/core/utils/helpers/extension_helper.dart';
 import '../../core/shared/widgets/art_image.dart';
 import '../../core/utils/helpers/helper_functions.dart';
-import '../widgets/Register_form.dart';
+import 'widgets/register_form.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
