@@ -27,6 +27,7 @@ dependencies:
   get_it: ^7.7.0
   intl: ^0.19.0
   material_design_icons_flutter: ^7.0.7296
+  modal_bottom_sheet: ^3.0.0
   page_transition: ^2.1.0
   phone_numbers_parser: ^9.0.0
   rename: ^3.0.2

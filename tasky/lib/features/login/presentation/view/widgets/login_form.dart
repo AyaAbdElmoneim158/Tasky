@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasky/core/utils/helpers/extension_helper.dart';
-
-import '../../../../../core/shared/widgets/auth_footer_rich_text.dart';
-import '../../../../../core/shared/widgets/phone_text_field.dart';
 import '../../../../../core/utils/constants/sizes.dart';
 import '../../../../../core/utils/constants/spacing.dart';
-import '../../../../../core/utils/constants/strings.dart';
-import '../../../../../core/utils/constants/styles.dart';
-import '../../../../../core/utils/helpers/helper_functions.dart';
-import '../../../../../core/utils/routing/routes.dart';
+import '../../view_model/login_cubit.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+
+import 'footer_text.dart';
+import 'login_btn.dart';
+import 'password_field.dart';
+import 'phone_text_field.dart';
+import 'title.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({
@@ -17,53 +19,82 @@ class LoginForm extends StatelessWidget {
   // ! FormKey + controllers + validation prompt
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(AppSizes.defaultPadding),
-      child: Form(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Title --------------------------------------------------------------
-            Text(
-              AppStrings.login,
-              style: Styles.font24BlackBold(context),
-              textAlign: TextAlign.start,
-            ).zoomIn(milliseconds: 750),
-            verticalSpace(AppSizes.spaceBtwItems),
-            // Phone_field  --------------------------------------------------------------
-            PhoneTextField(phoneController: TextEditingController())
-                .zoomIn(milliseconds: 1000),
-            verticalSpace(AppSizes.spaceBtwItems),
-            // Password_field  ---------------------------------------------------
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: AppStrings.password,
-                suffixIcon: Icon(Icons.remove_red_eye_outlined),
-              ),
-              obscureText: true,
-            ).zoomIn(milliseconds: 1250),
-            verticalSpace(AppSizes.spaceBtwItems),
+    return BlocConsumer<LoginCubit, LoginState>(
+      listenWhen: (previous, current) =>
+          current is LoginLoadingState ||
+          current is LoginSuccessState ||
+          current is LoginErrorState,
+      listener: (BuildContext context, LoginState state) {
+        // LoginLoadingState -> CircularProgressIndicator
+        // LoginSuccessState -> NavToHome
+        // LoginErrorState -> showDialog
 
-            // Btn -----------------------------------------------------------------
-            SizedBox(
-              width: AppHelperFunctions.screenWidth(context),
-              child: ElevatedButton(
-                onPressed: () {},
-                child: const Text(AppStrings.signIn),
-              ),
-            ).zoomIn(milliseconds: 1500),
-            verticalSpace(AppSizes.spaceBtwItems),
+        if (state is LoginSuccessState) {
+          context.showAwesomeSnackBar(
+              message:
+                  "Congratulations! You have successfully logged in. Let's get started on your next task!");
+          Future.delayed(const Duration(seconds: 5), () {
+            // ignore: use_build_context_synchronously
+            Navigator.pushReplacementNamed(context, '/home');
+          });
+        } else if (state is LoginErrorState) {
+          //!showDialog
+          context.showAwesomeSnackBar(
+            message: state.error,
+            type: ContentType.failure,
+          );
+        }
+      },
+      builder: (BuildContext context, LoginState state) {
+        final loginCubit = BlocProvider.of<LoginCubit>(context);
 
-            // footer Text -----------------------------------------------------------------
-            AuthFooterRichText(
-              span1: AppStrings.didNotHaveAccount,
-              span2: AppStrings.signUpHere,
-              onPressed: () => Navigator.pushReplacementNamed(
-                  context, AppRoutes.registerView),
-            ).zoomIn(milliseconds: 1750),
-          ],
-        ),
-      ),
+        return Padding(
+          padding: EdgeInsets.all(AppSizes.defaultPadding),
+          child: Form(
+            key: loginCubit.signInFormKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //* Title --------------------------------------------------------------
+                (state is LoginSuccessState)
+                    ? buildTitle(context).zoomOut(milliseconds: 750)
+                    : buildTitle(context).zoomIn(milliseconds: 750),
+                verticalSpace(AppSizes.spaceBtwItems),
+                //* Phone_field  --------------------------------------------------------------
+                (state is LoginSuccessState)
+                    ? buildPhoneTextField(loginCubit).zoomIn(milliseconds: 1000)
+                    : buildPhoneTextField(loginCubit)
+                        .zoomIn(milliseconds: 1000),
+                verticalSpace(AppSizes.spaceBtwItems),
+                //* Password_field  ---------------------------------------------------
+                (state is LoginSuccessState)
+                    ? buildPasswordField(loginCubit).zoomIn(milliseconds: 1250)
+                    : buildPasswordField(loginCubit)
+                        .zoomOut(milliseconds: 1250),
+
+                verticalSpace(AppSizes.spaceBtwItems),
+                //* Btn -----------------------------------------------------------------
+                //!Loading Btn
+                (state is LoginLoadingState)
+                    ? const SizedBox(
+                        height: 24, child: CircularProgressIndicator())
+                    : (state is LoginSuccessState)
+                        ? buildLoginBtn(context, loginCubit)
+                            .zoomIn(milliseconds: 1500)
+                        : buildLoginBtn(context, loginCubit)
+                            .zoomOut(milliseconds: 1500),
+
+                verticalSpace(AppSizes.spaceBtwItems),
+
+                //* footer Text -----------------------------------------------------------------
+                (state is LoginSuccessState)
+                    ? buildFooterText(context).zoomIn(milliseconds: 1750)
+                    : buildFooterText(context).zoomOut(milliseconds: 1750),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,5 +1,8 @@
-import 'package:flutter/widgets.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:flutter/material.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 // Extension on Widget to add all animations from animate_do
 extension AnimateExtension on Widget {
@@ -473,4 +476,116 @@ extension AnimateExtension on Widget {
         delay: Duration(milliseconds: delay),
         child: this,
       );
+}
+
+extension PopupExtension on BuildContext {
+  // Show a Snackbar using awesome_snackbar_content
+  void showAwesomeSnackBar({
+    required String message,
+    ContentType type = ContentType.success,
+  }) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        content: AwesomeSnackbarContent(
+          title: 'Notification',
+          message: message,
+          contentType: type,
+        ),
+        duration: const Duration(seconds: 4),
+      ),
+    );
+  }
+
+  // Show an AwesomeDialog
+  Future<void> showAwesomeDialog({
+    required String title,
+    required String description,
+    DialogType dialogType = DialogType.info,
+    String? confirmText,
+    String? cancelText,
+    VoidCallback? onConfirm,
+    VoidCallback? onCancel,
+  }) {
+    return AwesomeDialog(
+      context: this,
+      dialogType: dialogType,
+      animType: AnimType.scale,
+      title: title,
+      desc: description,
+      btnOkText: confirmText,
+      btnCancelText: cancelText,
+      btnOkOnPress: onConfirm,
+      btnCancelOnPress: onCancel,
+    ).show();
+  }
+
+  // Show a BottomSheet using modal_bottom_sheet
+  Future<void> showCustomBottomSheet({
+    required Widget child,
+    bool isDismissible = true,
+    ShapeBorder? shape,
+    Color? backgroundColor,
+  }) {
+    return showMaterialModalBottomSheet(
+      context: this,
+      isDismissible: isDismissible,
+      shape: shape,
+      backgroundColor: backgroundColor,
+      builder: (BuildContext context) {
+        return child;
+      },
+    );
+  }
+
+  // Show a simple dialog with awesome_dialog
+  Future<void> showSimpleDialog({
+    required String title,
+    required String description,
+    String? buttonText,
+    VoidCallback? onButtonPressed,
+  }) {
+    return AwesomeDialog(
+      context: this,
+      dialogType: DialogType.info,
+      animType: AnimType.scale,
+      title: title,
+      desc: description,
+      btnOkText: buttonText,
+      btnOkOnPress: onButtonPressed,
+    ).show();
+  }
+
+  // Show a loading dialog with awesome_dialog
+  Future<void> showLoadingDialog({
+    String message = 'Loading...',
+  }) {
+    return AwesomeDialog(
+      context: this,
+      dialogType: DialogType.info,
+      animType: AnimType.scale,
+      title: message,
+      btnOk: Container(), // Hide the OK button
+      dismissOnBackKeyPress: false,
+    ).show();
+  }
+
+  // Show a confirmation dialog with awesome_dialog
+  Future<bool> showConfirmationDialog({
+    required String title,
+    required String description,
+    String confirmText = 'Yes',
+    String cancelText = 'No',
+  }) {
+    return AwesomeDialog(
+      context: this,
+      dialogType: DialogType.question,
+      animType: AnimType.scale,
+      title: title,
+      desc: description,
+      btnOkText: confirmText,
+      btnCancelText: cancelText,
+      btnOkOnPress: () => Navigator.of(this).pop(true),
+      btnCancelOnPress: () => Navigator.of(this).pop(false),
+    ).show().then((value) => value ?? false);
+  }
 }
