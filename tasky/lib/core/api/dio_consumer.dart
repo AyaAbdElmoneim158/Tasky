@@ -93,4 +93,11 @@ class DioConsumer extends ApiConsumer {
       handleDioExceptions(e);
     }
   }
+
+  @override
+  void setTokenIntoHeaderAfterLogin(String token) {
+    dio.options.headers = {
+      'Authorization': 'Bearer $token',
+    };
+  }
 }

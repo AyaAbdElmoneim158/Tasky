@@ -12,6 +12,7 @@ Project Description
 
 ### Done ✓
 
+- [x] handle data layer of login  
 - [x] Refactor code as features  
 - [x] Add assets + packages  
 

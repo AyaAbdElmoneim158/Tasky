@@ -22,4 +22,6 @@ abstract class ApiConsumer {
     Map<String, dynamic>? queryParameters,
     bool isFromData = false,
   });
+
+  void setTokenIntoHeaderAfterLogin(String token);
 }
