@@ -9,17 +9,17 @@ class ExperienceLevelDropButton extends StatelessWidget {
   const ExperienceLevelDropButton({
     super.key,
     required this.experienceLevelController,
+    this.validator,
   });
   final TextEditingController experienceLevelController;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
       isExpanded: true,
       isDense: true,
-      validator: (value) {
-        return null;
-      },
+      validator: validator,
       hint: Align(
         alignment: Alignment.centerLeft,
         child: Text(

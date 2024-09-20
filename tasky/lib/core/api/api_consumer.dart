@@ -24,4 +24,12 @@ abstract class ApiConsumer {
   });
 
   void setTokenIntoHeaderAfterLogin(String token);
+  void setContentTypeIntoHeader(String contentType);
+
+  Future<dynamic> put(
+    String path, {
+    Object? data,
+    Map<String, dynamic>? queryParameters,
+    bool isFromData = false,
+  });
 }

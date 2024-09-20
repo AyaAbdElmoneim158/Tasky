@@ -7,8 +7,8 @@ import '../../data/repos/login_repo.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginRepo loginRepo;
-  LoginCubit(this.loginRepo) : super(LoginInitial());
+  final LoginRepo _loginRepo;
+  LoginCubit(this._loginRepo) : super(LoginInitial());
   static LoginCubit get(context) => BlocProvider.of(context);
 
   GlobalKey<FormState> signInFormKey = GlobalKey();
@@ -29,7 +29,7 @@ class LoginCubit extends Cubit<LoginState> {
       password: loginPasswordController.text,
       phone: fullPhoneNumberValue,
     );
-    final response = await loginRepo.login(requestBody);
+    final response = await _loginRepo.login(requestBody);
     response.fold(
       (error) => emit(LoginErrorState(error)),
       (loginResponse) => emit(LoginSuccessState(loginResponse)),

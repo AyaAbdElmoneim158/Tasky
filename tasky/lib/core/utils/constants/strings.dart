@@ -30,7 +30,12 @@ abstract class AppStrings {
   static const String myTasks = 'My Tasks';
   static const String profile = 'Profile';
   static const String taskDetails = 'task Details';
-
   static const String pleaseChooseExperienceLevel =
       'Please choose experience level';
+
+  static String nameProfile = 'Name'.toUpperCase();
+  static String phone = 'phone'.toUpperCase();
+  static String level = 'level'.toUpperCase();
+  static String location = 'Location'.toUpperCase();
+  static String experienceYears = 'Years of experience'.toUpperCase();
 }

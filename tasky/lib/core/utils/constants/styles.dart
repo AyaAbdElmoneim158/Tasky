@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tasky/core/utils/constants/sizes.dart';
 
 import 'colors.dart';
 
@@ -38,6 +39,42 @@ class Styles {
     fontWeight: FontWeightHelper.bold,
     color: AppColors.primary,
   );
+
+  static TextStyle font16GrayBold = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: AppColors.textPrimary.withOpacity(0.6),
+  );
+
+  static TextStyle font16BlackBold = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: AppColors.textPrimary,
+  );
+
+  static TextStyle font12GrayRegular = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: AppColors.textPrimary.withOpacity(0.6),
+    height: 18,
+  );
+
+  static TextStyle font16GrayRegular = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.bold,
+  );
+
+  static TextStyle font12DarkMedium = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.medium,
+  );
+
+  static BoxDecoration profileCardDecoration() {
+    return BoxDecoration(
+      color: AppColors.grey,
+      borderRadius: BorderRadius.circular(AppSizes.borderRadiusLg),
+    );
+  }
 }
 
 class FontWeightHelper {

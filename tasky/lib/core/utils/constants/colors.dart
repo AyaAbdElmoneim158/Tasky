@@ -25,6 +25,15 @@ class AppColors {
   static const Color textHintGray = Color(0xFF7F7F7F);
   static const Color textGray = Color(0xFF757575);
   static const Color textDarkGrey = Color(0xFF7E7E7E);
+  static const Color textDarkerGrey = Color(0xFF7C7C80);
+  static const Color textLightGrey = Color(0xFFF0ECFF);
+
+  static const Color waitingLightColor = Color(0xFFFFE4F2);
+  static const Color waitingDarkColor = Color(0xFFFF7D53);
+  static const Color onprogressLightColor = Color(0xFFF0ECFF);
+  static const Color onprogressDarkColor = Color(0xFF5F33E1);
+  static const Color finishedLightColor = Color(0xFFE3F2FF);
+  static const Color finishedDarkColor = Color(0xFF0087FF);
 
   static const Color textWhite = Colors.white;
 

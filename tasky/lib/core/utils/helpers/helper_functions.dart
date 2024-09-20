@@ -3,6 +3,10 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:intl/intl.dart';
 
+import '../../api/api_consumer.dart';
+import '../../api/end_points.dart';
+import 'cache_helper.dart';
+
 class AppHelperFunctions {
   static Color? getColor(String value) {
     if (value == 'Green') {
@@ -120,5 +124,13 @@ class AppHelperFunctions {
       wrappedList.add(Row(children: rowChildren));
     }
     return wrappedList;
+  }
+
+  static Future<void> saveUserData(String accessToken, String refreshToken,
+      String userId, ApiConsumer api) async {
+    await CacheHelper.setSecuredString(ApiKey.accessToken, accessToken);
+    await CacheHelper.setSecuredString(ApiKey.refreshToken, refreshToken);
+    await CacheHelper.setSecuredString(ApiKey.userId, userId);
+    api.setTokenIntoHeaderAfterLogin(accessToken);
   }
 }

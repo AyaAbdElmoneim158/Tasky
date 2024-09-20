@@ -8,15 +8,14 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 import 'footer_text.dart';
 import 'login_btn.dart';
-import 'password_field.dart';
-import 'phone_text_field.dart';
-import 'title.dart';
+import 'login_password_field.dart';
+import 'login_phone_text_field.dart';
+import 'login_title.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({
     super.key,
   });
-  // ! FormKey + controllers + validation prompt
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
@@ -55,41 +54,39 @@ class LoginForm extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //* Title --------------------------------------------------------------
+                //* Title ----------------------------------------------------->
                 (state is LoginSuccessState)
-                    ? buildTitle(context).zoomOut(milliseconds: 750)
-                    : buildTitle(context).zoomIn(milliseconds: 750),
+                    ? buildLoginTitle(context).zoomOut(750)
+                    : buildLoginTitle(context).zoomIn(750),
                 verticalSpace(AppSizes.spaceBtwItems),
-                //* Phone_field  --------------------------------------------------------------
+                //* Phone_field  ---------------------------------------------->
                 (state is LoginSuccessState)
-                    ? buildPhoneTextField(loginCubit).zoomIn(milliseconds: 1000)
-                    : buildPhoneTextField(loginCubit)
-                        .zoomIn(milliseconds: 1000),
+                    ? buildLoginPhoneTextField(loginCubit).zoomIn(1000)
+                    : buildLoginPhoneTextField(loginCubit).zoomIn(1000),
                 verticalSpace(AppSizes.spaceBtwItems),
-                //* Password_field  ---------------------------------------------------
+                //* Password_field  ------------------------------------------->
                 (state is LoginSuccessState)
-                    ? buildPasswordField(loginCubit).zoomIn(milliseconds: 1250)
-                    : buildPasswordField(loginCubit)
-                        .zoomOut(milliseconds: 1250),
+                    ? buildLoginPasswordField(loginCubit).zoomIn(1250)
+                    : buildLoginPasswordField(loginCubit).zoomOut(1250),
 
                 verticalSpace(AppSizes.spaceBtwItems),
-                //* Btn -----------------------------------------------------------------
+                //* Btn ------------------------------------------------------->
                 //!Loading Btn
                 (state is LoginLoadingState)
                     ? const SizedBox(
-                        height: 24, child: CircularProgressIndicator())
+                        height: 24,
+                        child: CircularProgressIndicator(),
+                      )
                     : (state is LoginSuccessState)
-                        ? buildLoginBtn(context, loginCubit)
-                            .zoomIn(milliseconds: 1500)
-                        : buildLoginBtn(context, loginCubit)
-                            .zoomOut(milliseconds: 1500),
+                        ? buildLoginBtn(context, loginCubit).zoomIn(1500)
+                        : buildLoginBtn(context, loginCubit).zoomOut(1500),
 
                 verticalSpace(AppSizes.spaceBtwItems),
 
-                //* footer Text -----------------------------------------------------------------
+                //* footer Text ----------------------------------------------->
                 (state is LoginSuccessState)
-                    ? buildFooterText(context).zoomIn(milliseconds: 1750)
-                    : buildFooterText(context).zoomOut(milliseconds: 1750),
+                    ? buildLoginFooterText(context).zoomIn(1750)
+                    : buildLoginFooterText(context).zoomOut(1750),
               ],
             ),
           ),

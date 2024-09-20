@@ -15,3 +15,7 @@ class AppConstants {
     'Fresh': 'fresh',
   };
 }
+
+enum Status { waiting, finished, inProgress }
+
+enum Priority { low, high, medium }
