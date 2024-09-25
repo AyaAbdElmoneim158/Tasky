@@ -68,6 +68,23 @@ class Styles {
     fontSize: 12.sp,
     fontWeight: FontWeightHelper.medium,
   );
+  static TextStyle font19PurpleMedium = TextStyle(
+    fontSize: 19.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: AppColors.primary,
+  );
+
+  static TextStyle font12MainPurpleMedium = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: AppColors.primary,
+  );
+
+  static TextStyle font19WhiteBold = TextStyle(
+    fontSize: 19.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: Colors.white,
+  );
 
   static BoxDecoration profileCardDecoration() {
     return BoxDecoration(

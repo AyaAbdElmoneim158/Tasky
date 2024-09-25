@@ -11,7 +11,7 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   ///* Cubit -------------------------------------------------------------------
-  sl.registerFactory<LoginCubit>(() => LoginCubit(sl()));
+  sl.registerLazySingleton<LoginCubit>(() => LoginCubit(sl()));
   sl.registerLazySingleton<LoginRepoImpl>(() => LoginRepoImpl(api: sl()));
   sl.registerLazySingleton<DioConsumer>(() => DioConsumer(dio: sl<Dio>()));
 

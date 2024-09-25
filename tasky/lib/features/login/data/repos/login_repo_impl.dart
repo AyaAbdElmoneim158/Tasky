@@ -16,8 +16,10 @@ class LoginRepoImpl extends LoginRepo {
   Future<Either<String, LoginResponse>> login(
       LoginRequestBody requestBody) async {
     try {
-      final response =
-          await api.post(EndPoints.login, data: requestBody.toJson());
+      final response = await api.post(
+        EndPoints.login,
+        data: requestBody.toJson(),
+      );
       final loginResponse = LoginResponse.fromJson(response);
 
       await AppHelperFunctions.saveUserData(

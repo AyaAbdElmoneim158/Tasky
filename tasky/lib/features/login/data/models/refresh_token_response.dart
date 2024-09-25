@@ -1,3 +1,4 @@
+//! Just access_token
 class RefreshTokenResponse {
   final String? accessToken;
   final String? refreshToken;

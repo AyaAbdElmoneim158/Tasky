@@ -1,8 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasky/core/utils/helpers/extension_helper.dart';
+import '../../../../../core/utils/constants/colors.dart';
 import '../../../../../core/utils/constants/sizes.dart';
 import '../../../../../core/utils/constants/spacing.dart';
+import '../../../../../core/utils/constants/strings.dart';
 import '../../view_model/login_cubit.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
@@ -29,11 +33,8 @@ class LoginForm extends StatelessWidget {
         // LoginErrorState -> showDialog
 
         if (state is LoginSuccessState) {
-          context.showAwesomeSnackBar(
-              message:
-                  "Congratulations! You have successfully logged in. Let's get started on your next task!");
+          context.showAwesomeSnackBar(message: AppStrings.successfullyLoggedIn);
           Future.delayed(const Duration(seconds: 5), () {
-            // ignore: use_build_context_synchronously
             Navigator.pushReplacementNamed(context, '/home');
           });
         } else if (state is LoginErrorState) {
@@ -55,19 +56,19 @@ class LoginForm extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //* Title ----------------------------------------------------->
-                (state is LoginSuccessState)
+                (loginCubit.isLoginDone)
                     ? buildLoginTitle(context).zoomOut(750)
                     : buildLoginTitle(context).zoomIn(750),
                 verticalSpace(AppSizes.spaceBtwItems),
                 //* Phone_field  ---------------------------------------------->
-                (state is LoginSuccessState)
-                    ? buildLoginPhoneTextField(loginCubit).zoomIn(1000)
-                    : buildLoginPhoneTextField(loginCubit).zoomIn(1000),
+                (loginCubit.isLoginDone)
+                    ? buildLoginPhoneTextField(context).zoomOut(1000)
+                    : buildLoginPhoneTextField(context).zoomIn(1000),
                 verticalSpace(AppSizes.spaceBtwItems),
                 //* Password_field  ------------------------------------------->
-                (state is LoginSuccessState)
-                    ? buildLoginPasswordField(loginCubit).zoomIn(1250)
-                    : buildLoginPasswordField(loginCubit).zoomOut(1250),
+                (loginCubit.isLoginDone)
+                    ? buildLoginPasswordField(context).zoomOut(1250)
+                    : buildLoginPasswordField(context).zoomIn(1250),
 
                 verticalSpace(AppSizes.spaceBtwItems),
                 //* Btn ------------------------------------------------------->
@@ -75,18 +76,20 @@ class LoginForm extends StatelessWidget {
                 (state is LoginLoadingState)
                     ? const SizedBox(
                         height: 24,
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(
+                          color: AppColors.primary,
+                        ),
                       )
-                    : (state is LoginSuccessState)
-                        ? buildLoginBtn(context, loginCubit).zoomIn(1500)
-                        : buildLoginBtn(context, loginCubit).zoomOut(1500),
+                    : (loginCubit.isLoginDone)
+                        ? buildLoginBtn(context).zoomOut(1500)
+                        : buildLoginBtn(context).zoomIn(1500),
 
                 verticalSpace(AppSizes.spaceBtwItems),
 
                 //* footer Text ----------------------------------------------->
-                (state is LoginSuccessState)
-                    ? buildLoginFooterText(context).zoomIn(1750)
-                    : buildLoginFooterText(context).zoomOut(1750),
+                (loginCubit.isLoginDone)
+                    ? buildLoginFooterText(context).zoomOut(1750)
+                    : buildLoginFooterText(context).zoomIn(1750),
               ],
             ),
           ),

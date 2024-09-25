@@ -1,10 +1,18 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:ui';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../../api/api_consumer.dart';
 import '../../api/end_points.dart';
+import '../constants/colors.dart';
+import '../constants/images.dart';
 import 'cache_helper.dart';
 
 class AppHelperFunctions {
@@ -132,5 +140,159 @@ class AppHelperFunctions {
     await CacheHelper.setSecuredString(ApiKey.refreshToken, refreshToken);
     await CacheHelper.setSecuredString(ApiKey.userId, userId);
     api.setTokenIntoHeaderAfterLogin(accessToken);
+  }
+
+  static void pickImage(
+    ImageSource source,
+    BuildContext context,
+    dynamic addEditCubit,
+  ) async {
+    final ImagePicker picker = ImagePicker();
+
+    // Function to handle image picking logic
+    Future<void> pickImageFromSource(ImageSource source) async {
+      try {
+        final XFile? pickedImage = await picker.pickImage(source: source);
+        if (pickedImage != null) {
+          addEditCubit.taskImage = pickedImage;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('You have picked an image: ${pickedImage.name}'),
+              duration: const Duration(seconds: 3),
+            ),
+          );
+        }
+      } catch (e) {
+        // print(e);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Error picking image'),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      }
+    }
+
+    // Show options to pick image from Camera or Files
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Wrap(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.camera_alt),
+              title: const Text('Camera'),
+              onTap: () async {
+                await pickImageFromSource(ImageSource.camera);
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.photo_library),
+              title: const Text('Files'),
+              onTap: () async {
+                await pickImageFromSource(ImageSource.gallery);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  static String getRightFlagImage(String priority) {
+    switch (priority) {
+      case 'low':
+        return AppAssets.blueFlagIcon;
+      case 'high':
+        return AppAssets.redFlagIcon;
+      case 'medium':
+        return AppAssets.purpleFlagIcon;
+      default:
+        return '';
+    }
+  }
+
+  static Color getRightPriorityTextColor(String priority) {
+    switch (priority) {
+      case 'low':
+        return AppColors.finishedDarkColor;
+      case 'high':
+        return AppColors.waitingDarkColor;
+      case 'medium':
+        return AppColors.onprogressDarkColor;
+      default:
+        return Colors.white;
+    }
+  }
+
+  static Color getRightStatusContainerColor(String priority) {
+    switch (priority) {
+      case 'waiting':
+        return AppColors.waitingLightColor;
+      case 'inProgress':
+        return AppColors.onprogressLightColor;
+      case 'finished':
+        return AppColors.finishedLightColor;
+      default:
+        return Colors.white;
+    }
+  }
+
+  static Color getRightPriorityContainerColor(String priority) {
+    switch (priority) {
+      case 'low':
+        return AppColors.finishedDarkColor;
+      case 'high':
+        return AppColors.waitingDarkColor;
+      case 'medium':
+        return AppColors.onprogressDarkColor;
+      default:
+        return Colors.white;
+    }
+  }
+
+  static Color getRightStatusTextColor(String priority) {
+    switch (priority) {
+      case 'low':
+        return AppColors.finishedDarkColor;
+      case 'high':
+        return AppColors.waitingDarkColor;
+      case 'medium':
+        return AppColors.onprogressDarkColor;
+      default:
+        return Colors.white;
+    }
+  }
+
+  static String convertTimestampToDate(String timestamp) {
+    try {
+      DateTime dateTime = DateTime.parse(timestamp);
+
+      DateFormat dateFormat = DateFormat('dd/MM/yyyy');
+      String formattedDate = dateFormat.format(dateTime);
+
+      return formattedDate;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error parsing date: $e');
+      }
+      return '';
+    }
+  }
+
+  static ScrollBehavior buildScrollBehavior(BuildContext context) {
+    return ScrollConfiguration.of(context).copyWith(
+      dragDevices: {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      },
+    );
+  }
+
+  static String capitalizeFirstLetter(String input) {
+    if (input.isEmpty) return input;
+    return input[0].toUpperCase() + input.substring(1);
   }
 }

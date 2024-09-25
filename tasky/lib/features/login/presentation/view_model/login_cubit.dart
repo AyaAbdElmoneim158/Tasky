@@ -17,6 +17,7 @@ class LoginCubit extends Cubit<LoginState> {
   Widget icon = const Icon(Icons.remove_red_eye_outlined);
   bool hidePassword = false;
   String? fullPhoneNumberValue;
+  bool isLoginDone = false;
 
   void disposeControllers() {
     loginPhoneController.clear();
@@ -32,7 +33,10 @@ class LoginCubit extends Cubit<LoginState> {
     final response = await _loginRepo.login(requestBody);
     response.fold(
       (error) => emit(LoginErrorState(error)),
-      (loginResponse) => emit(LoginSuccessState(loginResponse)),
+      (loginResponse) {
+        emit(LoginSuccessState(loginResponse));
+        isLoginDone = true;
+      },
     );
     disposeControllers();
   }
