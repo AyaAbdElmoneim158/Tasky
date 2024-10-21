@@ -1,5 +1,5 @@
 abstract class AppAssets {
-  //! Images ---------------------------------------------------------------------------------
+  /// Images ---------------------------------------------------------------------------------
   static String logo = 'assets/images/icon.png';
   static String splash = 'assets/images/splash.png';
   static String art = 'assets/images/art.png';
@@ -7,7 +7,7 @@ abstract class AppAssets {
   static String noInternet = 'assets/images/no_internet.png';
   static String image404 = 'assets/images/404.png';
 
-  //! Icons ---------------------------------------------------------------------------------
+  /// Icons ---------------------------------------------------------------------------------
   static const String addPhoto = 'assets/icons/add_photo.svg';
   static const String arrowLeftDark = 'assets/icons/arrow_left_dark.png';
   static const String arrowDown = 'assets/icons/arrow_down.svg';

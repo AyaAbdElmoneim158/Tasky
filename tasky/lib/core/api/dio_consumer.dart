@@ -23,7 +23,7 @@ class DioConsumer extends ApiConsumer {
   }
 
   @override
-  Future delete(
+  Future<dynamic> delete(
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
@@ -42,8 +42,11 @@ class DioConsumer extends ApiConsumer {
   }
 
   @override
-  Future get(String path,
-      {Object? data, Map<String, dynamic>? queryParameters}) async {
+  Future<dynamic> get(
+    String path, {
+    Object? data,
+    Map<String, dynamic>? queryParameters,
+  }) async {
     try {
       final response = await dio.get(
         path,
@@ -57,7 +60,7 @@ class DioConsumer extends ApiConsumer {
   }
 
   @override
-  Future patch(
+  Future<dynamic> patch(
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
@@ -76,7 +79,7 @@ class DioConsumer extends ApiConsumer {
   }
 
   @override
-  Future post(
+  Future<dynamic> post(
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
@@ -95,21 +98,7 @@ class DioConsumer extends ApiConsumer {
   }
 
   @override
-  void setTokenIntoHeaderAfterLogin(String token) {
-    dio.options.headers = {
-      'Authorization': 'Bearer $token',
-    };
-  }
-
-  @override
-  void setContentTypeIntoHeader(String contentType) {
-    dio.options.headers = {
-      'Content-Type': contentType,
-    };
-  }
-
-  @override
-  Future put(
+  Future<dynamic> put(
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
@@ -125,5 +114,11 @@ class DioConsumer extends ApiConsumer {
     } on DioException catch (e) {
       handleDioExceptions(e);
     }
+  }
+
+  void setTokenIntoHeaderAfterLogin(String token) {
+    dio.options.headers = {
+      'Authorization': 'Bearer $token',
+    };
   }
 }

@@ -1,20 +1,20 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class AppSizes {
-  // Padding and margin sizes ----------------------------------------------------------------
+  /// Padding and margin sizes ----------------------------------------------------------------
   static double xs = 4.0.w;
   static double sm = 8.0.w;
   static double md = 16.0.w;
   static double lg = 24.0.w;
   static double xl = 32.0.w;
 
-  // Icon sizes ----------------------------------------------------------------
+  /// Icon sizes ----------------------------------------------------------------
   static double iconXs = 12.0.w;
   static double iconSm = 16.0.w;
   static double iconMd = 24.0.w;
   static double iconLg = 32.0.w;
 
-  // Font sizes ----------------------------------------------------------------
+  /// Font sizes ----------------------------------------------------------------
   static double fontSizeXSm = 12.0.sp;
   static double fontSizeSm = 14.0.sp;
   static double fontSizeMd = 16.0.sp;
@@ -22,7 +22,7 @@ abstract class AppSizes {
   static double fontSizeXLg = 24.0.sp;
   static double fontSizeXXLg = 32.0.sp;
 
-  // Button sizes ----------------------------------------------------------------
+  /// Button sizes ----------------------------------------------------------------
   static double buttonHeight = 18.0.w;
   static double buttonRadius = 12.0.w;
   static double buttonWidth = 120.0.w;

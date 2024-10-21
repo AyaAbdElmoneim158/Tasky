@@ -115,8 +115,7 @@ class AppHelperFunctions {
     return MediaQuery.of(context!).size.width;
   }
 
-  static String getFormattedDate(DateTime date,
-      {String format = 'dd MMM yyyy'}) {
+  static String getFormattedDate(DateTime date, {String format = 'dd MMM yyyy'}) {
     return DateFormat(format).format(date);
   }
 
@@ -127,19 +126,41 @@ class AppHelperFunctions {
   static List<Widget> wrapWidgets(List<Widget> widgets, int rowSize) {
     final wrappedList = <Widget>[];
     for (var i = 0; i < widgets.length; i += rowSize) {
-      final rowChildren = widgets.sublist(
-          i, i + rowSize > widgets.length ? widgets.length : i + rowSize);
+      final rowChildren = widgets.sublist(i, i + rowSize > widgets.length ? widgets.length : i + rowSize);
       wrappedList.add(Row(children: rowChildren));
     }
     return wrappedList;
   }
 
-  static Future<void> saveUserData(String accessToken, String refreshToken,
-      String userId, ApiConsumer api) async {
-    await CacheHelper.setSecuredString(ApiKey.accessToken, accessToken);
-    await CacheHelper.setSecuredString(ApiKey.refreshToken, refreshToken);
-    await CacheHelper.setSecuredString(ApiKey.userId, userId);
-    api.setTokenIntoHeaderAfterLogin(accessToken);
+  static Future<void> saveUserData({
+    String? accessToken,
+    String? refreshToken,
+    String? userId,
+    ApiConsumer? api,
+  }) async {
+    try {
+      final storedAccessToken = await CacheHelper.getString(ApiKey.accessToken);
+      if (storedAccessToken != accessToken) {
+        await CacheHelper.saveData(ApiKey.accessToken, accessToken!);
+      } //"access_token" : " "
+
+      final storedRefreshToken = await CacheHelper.getString(ApiKey.refreshToken);
+      if (storedRefreshToken != refreshToken) {
+        await CacheHelper.saveData(ApiKey.refreshToken, refreshToken!);
+      } //"refresh_token" : " "
+
+      if (userId != null) {
+        final storedUserId = await CacheHelper.getString(ApiKey.userId);
+        if (storedUserId != userId) {
+          await CacheHelper.saveData(ApiKey.userId, userId);
+        }
+      } //"user_id" : " "
+
+      // api?.setTokenIntoHeaderAfterLogin(accessToken!); // 'Authorization': 'Bearer $token',
+      // setTokenIntoHeaderAfterLogin
+    } catch (e) {
+      debugPrint("Error saving user data: $e");
+    }
   }
 
   static void pickImage(
@@ -230,11 +251,11 @@ class AppHelperFunctions {
   static Color getRightStatusContainerColor(String priority) {
     switch (priority) {
       case 'waiting':
-        return AppColors.waitingLightColor;
+        return AppColors.waitingDarkColor.withOpacity(0.1);
       case 'inProgress':
-        return AppColors.onprogressLightColor;
+        return AppColors.onprogressDarkColor.withOpacity(0.1);
       case 'finished':
-        return AppColors.finishedLightColor;
+        return AppColors.finishedDarkColor.withOpacity(0.1);
       default:
         return Colors.white;
     }
@@ -243,11 +264,11 @@ class AppHelperFunctions {
   static Color getRightPriorityContainerColor(String priority) {
     switch (priority) {
       case 'low':
-        return AppColors.finishedDarkColor;
+        return AppColors.finishedDarkColor.withOpacity(0.1);
       case 'high':
-        return AppColors.waitingDarkColor;
+        return AppColors.waitingDarkColor.withOpacity(0.1);
       case 'medium':
-        return AppColors.onprogressDarkColor;
+        return AppColors.onprogressDarkColor.withOpacity(0.1);
       default:
         return Colors.white;
     }
@@ -255,12 +276,12 @@ class AppHelperFunctions {
 
   static Color getRightStatusTextColor(String priority) {
     switch (priority) {
-      case 'low':
-        return AppColors.finishedDarkColor;
-      case 'high':
+      case 'waiting':
         return AppColors.waitingDarkColor;
-      case 'medium':
+      case 'inProgress':
         return AppColors.onprogressDarkColor;
+      case 'finished':
+        return AppColors.finishedDarkColor;
       default:
         return Colors.white;
     }

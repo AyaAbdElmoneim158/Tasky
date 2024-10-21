@@ -1,86 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../../injection_container.dart';
 
 class CacheHelper {
   static SharedPreferences? sharedPreferences = sl<SharedPreferences>();
-  static FlutterSecureStorage? flutterSecureStorage =
-      sl<FlutterSecureStorage>();
 
-  static dynamic getData({required String key}) {
-    debugPrint('SharedPrefHelper : getData with key : $key');
+  static dynamic getData(String key) {
+    debugPrint('CacheHelper: getData with key: $key');
     return sharedPreferences?.get(key);
   }
 
-  static getBool(String key) async {
-    debugPrint('SharedPrefHelper : getBool with key : $key');
+  static Future<bool> getBool(String key) async {
+    debugPrint('CacheHelper: getBool with key: $key');
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     return sharedPreferences.getBool(key) ?? false;
   }
 
-  static getDouble(String key) async {
-    debugPrint('SharedPrefHelper : getDouble with key : $key');
+  static Future<double> getDouble(String key) async {
+    debugPrint('CacheHelper: getDouble with key: $key');
     return sharedPreferences?.getDouble(key) ?? 0.0;
   }
 
-  static getInt(String key) async {
-    debugPrint('SharedPrefHelper : getInt with key : $key');
+  static Future<int> getInt(String key) async {
+    debugPrint('CacheHelper: getInt with key: $key');
     return sharedPreferences?.getInt(key) ?? 0;
   }
 
-  static getString(String key) async {
-    debugPrint('SharedPrefHelper : getString with key : $key');
+  static Future<String> getString(String key) async {
+    debugPrint('CacheHelper: getString with key: $key');
     return sharedPreferences?.getString(key) ?? '';
   }
 
-  static Future<bool?> saveData({
-    required String key,
-    required dynamic value,
-  }) async {
-    debugPrint("SharedPrefHelper : setData with key : $key and value : $value");
+  static Future<bool?> saveData(String key, dynamic value) async {
+    debugPrint('CacheHelper: saveData with key: $key and value: $value');
     switch (value.runtimeType) {
       case const (String):
-        await sharedPreferences?.setString(key, value);
-        break;
+        return await sharedPreferences?.setString(key, value);
       case const (int):
-        await sharedPreferences?.setInt(key, value);
-        break;
+        return await sharedPreferences?.setInt(key, value);
       case const (bool):
-        await sharedPreferences?.setBool(key, value);
-        break;
+        return await sharedPreferences?.setBool(key, value);
       case const (double):
-        await sharedPreferences?.setDouble(key, value);
-        break;
+        return await sharedPreferences?.setDouble(key, value);
       default:
         return null;
     }
-    return null;
   }
 
   static Future<bool?> removeData({required String key}) async {
     return await sharedPreferences?.remove(key);
   }
 
-  static clearAllData() async {
-    debugPrint('SharedPrefHelper : all data has been cleared');
+  static Future<void> clearAllData() async {
+    debugPrint('CacheHelper: All data has been cleared');
     await sharedPreferences?.clear();
-  }
-
-  static setSecuredString(String key, String value) async {
-    debugPrint(
-        "FlutterSecureStorage : setSecuredString with key : $key and value : $value");
-    await flutterSecureStorage?.write(key: key, value: value);
-  }
-
-  /// Gets an String value from FlutterSecureStorage with given [key].
-  static getSecuredString(String key) async {
-    debugPrint('FlutterSecureStorage : getSecuredString with key :');
-    return await flutterSecureStorage?.read(key: key) ?? '';
-  }
-
-  static clearAllSecuredData() async {
-    debugPrint('FlutterSecureStorage : all data has been cleared');
-    await flutterSecureStorage?.deleteAll();
   }
 }

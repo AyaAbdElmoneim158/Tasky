@@ -41,6 +41,19 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: Text("SplashScreen"),
+      ),
+    );
+  }
+}
+
 class NotFoundPage extends StatelessWidget {
   const NotFoundPage({
     super.key,

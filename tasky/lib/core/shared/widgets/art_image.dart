@@ -1,19 +1,42 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/constants/device_utility.dart';
 import '../../utils/constants/images.dart';
-import '../../utils/helpers/helper_functions.dart';
-import 'fade_in_image.dart';
 
 class ArtImage extends StatelessWidget {
-  const ArtImage({super.key, this.height});
   final double? height;
+
+  const ArtImage({
+    super.key,
+    this.height,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return AppFadeInImage(
-      image: AppAssets.art,
-      width: AppHelperFunctions.screenWidth(context),
-      height: height ?? AppHelperFunctions.screenHeight(context) * 0.6,
+    return Stack(
+      children: [
+        // Background SVG with low opacity
+        Image.asset(
+          AppAssets.art,
+          height: height,
+          width: double.infinity,
+          fit: TDeviceUtils.isWindows() ? BoxFit.contain : BoxFit.cover,
+        ),
+        // Foreground image with gradient
+        Container(
+          foregroundDecoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.white,
+                Colors.white.withOpacity(0.0),
+              ],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              stops: const [0.14, 0.4],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

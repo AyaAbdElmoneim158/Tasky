@@ -30,8 +30,7 @@ abstract class AppStrings {
   static const String myTasks = 'My Tasks';
   static const String profile = 'Profile';
   static const String taskDetails = 'task Details';
-  static const String pleaseChooseExperienceLevel =
-      'Please choose experience level';
+  static const String pleaseChooseExperienceLevel = 'Please choose experience level';
   static const String successfullyLoggedIn =
       "Congratulations! You have successfully logged in. Let's get started on your next task!";
 
@@ -49,4 +48,9 @@ abstract class AppStrings {
   static const String priority = 'Priority';
   static const String dueDate = 'Due date';
   static const String addTask = 'Add task';
+
+  /// --------------------------------------------------------------------------------------------------------
+  static const String task = 'Task';
+  static const String y = 'y';
+  // static const String  = '';
 }

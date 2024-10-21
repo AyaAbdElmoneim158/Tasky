@@ -8,8 +8,8 @@ import 'core/utils/routing/screen_routing.dart';
 import 'core/utils/theme/theme.dart';
 // import 'package:flutter_offline/flutter_offline.dart';
 
-class App extends StatelessWidget {
-  const App({super.key});
+class TaskyApp extends StatelessWidget {
+  const TaskyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class App extends StatelessWidget {
           onUnknownRoute: (settings) => MaterialPageRoute(
             builder: (_) => const NotFoundPage(),
           ),
-        /*  builder: (context, child) {
+          /*  builder: (context, child) {
             return OfflineBuilder(
               connectivityBuilder: (
                 BuildContext context,
