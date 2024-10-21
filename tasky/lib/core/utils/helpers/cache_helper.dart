@@ -26,9 +26,9 @@ class CacheHelper {
     return sharedPreferences?.getInt(key) ?? 0;
   }
 
-  static Future<String> getString(String key) async {
+  static Future<String?> getString(String key) async {
     debugPrint('CacheHelper: getString with key: $key');
-    return sharedPreferences?.getString(key) ?? '';
+    return sharedPreferences?.getString(key);
   }
 
   static Future<bool?> saveData(String key, dynamic value) async {

@@ -12,11 +12,11 @@ class Styles {
     color: AppColors.textPrimary,
   );
 
-  static TextStyle font24BlackBold(context) => Theme.of(context).textTheme.headlineMedium!.copyWith(
+  static TextStyle font24BlackBold(BuildContext context) => Theme.of(context).textTheme.headlineMedium!.copyWith(
         fontWeight: FontWeight.bold,
       );
 
-  static TextStyle font14BlackRegular(context) => Theme.of(context).textTheme.bodySmall!.copyWith(
+  static TextStyle font14BlackRegular(BuildContext context) => Theme.of(context).textTheme.bodySmall!.copyWith(
         fontWeight: FontWeight.w400,
       );
 

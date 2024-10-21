@@ -52,5 +52,13 @@ abstract class AppStrings {
   /// --------------------------------------------------------------------------------------------------------
   static const String task = 'Task';
   static const String y = 'y';
-  // static const String  = '';
+
+  static const String success = "Success!";
+  static const String ok = "OK";
+  static const String error = "Error!";
+  static const String validationError = 'Validation Error';
+  static const String filledFields =
+      "Please ensure all fields are filled out correctly before proceeding. \n\nDouble-check your inputs to continue.";
+  static const String successfullySignedUp =
+      "Congratulations! You have successfully signed up. Let's get started on your next task!";
 }

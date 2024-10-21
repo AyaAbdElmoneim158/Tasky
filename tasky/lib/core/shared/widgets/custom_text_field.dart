@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../../../../../core/utils/helpers/validator_helper.dart';
 
 class CustomTextField extends StatefulWidget {
   final TextEditingController controller;
   final int maxLines;
   final bool readOnly;
   final String hintText;
+  final bool isPasswordField;
+  final String? Function(String?)? validator;
 
   const CustomTextField({
     super.key,
@@ -13,6 +14,8 @@ class CustomTextField extends StatefulWidget {
     required this.controller,
     this.maxLines = 1,
     this.readOnly = false,
+    this.isPasswordField = false,
+    this.validator,
   });
 
   @override
@@ -34,16 +37,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: (value) => AppValidator.validatePassword(value),
+      validator: widget.validator,
       controller: widget.controller,
       decoration: InputDecoration(
         hintText: widget.hintText,
-        suffixIcon: IconButton(
-          onPressed: _togglePasswordVisibility,
-          icon: _icon,
-        ),
+        suffixIcon: (widget.isPasswordField)
+            ? IconButton(
+                onPressed: _togglePasswordVisibility,
+                icon: _icon,
+              )
+            : null,
       ),
-      obscureText: _hidePassword,
+      obscureText: (widget.isPasswordField) ? _hidePassword : false,
       maxLines: widget.maxLines,
       readOnly: widget.readOnly,
     );
