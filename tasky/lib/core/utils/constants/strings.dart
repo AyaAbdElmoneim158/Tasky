@@ -61,4 +61,10 @@ abstract class AppStrings {
       "Please ensure all fields are filled out correctly before proceeding. \n\nDouble-check your inputs to continue.";
   static const String successfullySignedUp =
       "Congratulations! You have successfully signed up. Let's get started on your next task!";
+  static const String logout = 'Logout';
+  static const String logoutConfirmation = 'Are you sure you want to logout?';
+  static const String areYouSureLogout = 'Do you really want to logout?';
+  static const String yes = 'Yes';
+  static const String no = 'No';
+  static const String successfullyLoggedOut = 'You have successfully logged out.';
 }
