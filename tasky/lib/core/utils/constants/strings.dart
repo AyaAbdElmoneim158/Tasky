@@ -32,10 +32,21 @@ abstract class AppStrings {
   static const String taskDetails = 'task Details';
   static const String pleaseChooseExperienceLevel =
       'Please choose experience level';
+  static const String successfullyLoggedIn =
+      "Congratulations! You have successfully logged in. Let's get started on your next task!";
 
   static String nameProfile = 'Name'.toUpperCase();
   static String phone = 'phone'.toUpperCase();
   static String level = 'level'.toUpperCase();
   static String location = 'Location'.toUpperCase();
   static String experienceYears = 'Years of experience'.toUpperCase();
+
+  static const String addNewTask = 'Add new task';
+  static const String taskTitle = 'Task title';
+  static const String enterTaskTitleHere = 'Enter title here...';
+  static const String enterTaskDescriptionHere = 'Enter description here...';
+  static const String taskDec = 'Task Description';
+  static const String priority = 'Priority';
+  static const String dueDate = 'Due date';
+  static const String addTask = 'Add task';
 }
