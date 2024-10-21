@@ -6,11 +6,11 @@ import 'end_points.dart';
 class ApiInterceptor extends InterceptorsWrapper {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
-    options.headers['Accept'] = 'application/json';
+    options.headers[ApiKey.accept] = ApiKey.applicationJson;
     // Await the access token asynchronously
     final accessToken = await CacheHelper.getString(ApiKey.accessToken);
     if (accessToken.isNotEmpty) {
-      options.headers["Authorization"] = "Bearer $accessToken";
+      options.headers[ApiKey.authorization] = ApiKey.setBearerAccessToken(accessToken);
     }
 
     handler.next(options); // Continue with the request
@@ -32,7 +32,8 @@ class ApiInterceptor extends InterceptorsWrapper {
             options: Options(
               method: requestOptions.method,
               headers: {
-                "Authorization": "Bearer $newAccessToken",
+      ApiKey.authorization: ApiKey.setBearerAccessToken(newAccessToken),
+
               },
             ),
             data: requestOptions.data,
@@ -47,7 +48,7 @@ class ApiInterceptor extends InterceptorsWrapper {
 
   Future<bool> _refreshToken(String refreshToken) async {
     try {
-      /*final authRepo = sl<AuthRepoImpl>();
+     /* final authRepo = sl<AuthRepoImpl>();
       final response = await authRepo.refreshToken(refreshToken);
       final accessToken = response.accessToken;
       if (accessToken != null) {
