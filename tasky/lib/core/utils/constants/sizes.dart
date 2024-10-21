@@ -40,7 +40,8 @@ abstract class AppSizes {
   static double defaultSpace = 24.0.w;
   static double spaceBtwItems = 16.0.w;
   static double spaceBtwSections = 32.0.w;
-  static double defaultPadding = 20.0.w;
+  static double defaultPadding = 24.5.w;
+  static double defaultBtwFields = 20.0.w;
 
   /// Border radius  ----------------------------------------------------------------
   static double borderRadiusSm = 4.0.w;

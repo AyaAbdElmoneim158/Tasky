@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
+import '../../../features/auth/presentation/view/login_view.dart';
+import '../../../features/auth/presentation/view/register_view.dart';
+import '../../../features/auth/presentation/view/splash_view.dart';
+import '../../../features/auth/presentation/view/welcome_view.dart';
+import '../../../features/auth/presentation/view_model/auth_cubit.dart';
+import '../../../injection_container.dart';
 import 'routes.dart';
 import 'screen_routing.dart';
 
@@ -9,7 +16,25 @@ class AppRouter {
 
     switch (settings.name) {
       case AppRoutes.initRoute:
-        return pageTransition(settings, const SplashScreen());
+        return pageTransition(settings, const SplashView());
+      case AppRoutes.welcomeView:
+        return pageTransition(settings, const WelcomeView());
+      case AppRoutes.loginView:
+        return pageTransition(
+          settings,
+          BlocProvider(
+            create: (context) => sl<AuthCubit>(),
+            child: const LoginView(),
+          ),
+        );
+      case AppRoutes.registerView:
+        return pageTransition(
+          settings,
+          BlocProvider(
+            create: (context) => sl<AuthCubit>(),
+            child: const RegisterView(),
+          ),
+        );
 
       case AppRoutes.noFoundRoute:
       default:
@@ -28,36 +53,4 @@ class AppRouter {
       settings: settings,
     );
   }
-}
-
-//args_____________________
-class TaskDetailsScreenArgs {
-  final String taskImage;
-  final String taskTitle;
-  final String id;
-  final String taskDesc;
-  final String priority;
-  final String status;
-
-  TaskDetailsScreenArgs({
-    required this.taskImage,
-    required this.taskTitle,
-    required this.id,
-    required this.taskDesc,
-    required this.priority,
-    required this.status,
-  });
-}
-
-class AddEditTaskScreenArgs {
-  final String? taskImage;
-  final String? taskTitle;
-  final String? id;
-  final String? taskDesc;
-  final String? priority;
-  final String? status;
-  final bool isEdit;
-
-  AddEditTaskScreenArgs(
-      {this.taskImage, this.taskTitle, this.id, this.taskDesc, this.priority, this.status, required this.isEdit});
 }
