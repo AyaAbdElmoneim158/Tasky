@@ -34,7 +34,7 @@ class _SplashViewState extends State<SplashView> {
 
       if (!showWelcome) {
         if (showLogin != null) {
-          Navigator.pushReplacementNamed(context, AppRoutes.homeView);
+          Navigator.pushReplacementNamed(context, AppRoutes.profileView);
         } else {
           Navigator.pushReplacementNamed(context, AppRoutes.loginView);
         }
