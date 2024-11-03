@@ -10,9 +10,9 @@ class EndPoints {
   // Todos.......................................................................
   static String getTodosList = "/todos";
   static String getTodo(String id) => "/todos/$id";
-  static String createTask = "/todos";
-  static String editTask(String id) => "/todos/$id";
-  static String deleteTask(String id) => "/todos/$id";
+  static String createTodo = "/todos";
+  static String editTodo(String id) => "/todos/$id";
+  static String deleteTodo(String id) => "/todos/$id";
 
   static String uploadImage = "/upload/image";
 }
