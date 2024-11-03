@@ -8,5 +8,6 @@ class AppRoutes {
 
   static const String homeView = '/home';
   static const String profileView = '/profile';
-  static const String addEditTaskView = '/addEditTask';
+  static const String addEditTodoView = '/addEditTodo';
+  static const String todoDetailsView = "/todoDetails";
 }

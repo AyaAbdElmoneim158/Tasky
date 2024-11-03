@@ -68,7 +68,7 @@ class ProfileSuccessWidget extends StatelessWidget {
             verticalSpace(AppSizes.xl),
             CustomButton(
               onPressed: () => _showLogoutConfirmation(context),
-              child: Text(AppStrings.logout),
+              child: const Text(AppStrings.logout),
             ),
           ],
         ),
